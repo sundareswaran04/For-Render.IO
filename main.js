@@ -5,6 +5,17 @@ const http = require('http').Server(app);
 const PORT = process.env.PORT || 4000;
 const path = require('path');
 const io = require('socket.io')(http);
+const fs = require('fs');
+const server = require('https');
+
+
+const server = https.createServer({
+    key: fs.readFileSync('path/to/your/privatekey.pem'),
+    cert: fs.readFileSync('path/to/your/certificate.pem')
+}, app)
+
+
+
 app.use(express.static(path.join(__dirname)));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
